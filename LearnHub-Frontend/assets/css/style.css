@@ -1,0 +1,339 @@
+
+/* =====================================
+   LEARNHUB - GLOBAL STYLES
+===================================== */
+
+:root {
+    --primary: #6d4aff;
+    --primary-dark: #5635db;
+    --primary-light: #f0ebff;
+
+    --background: #f5f3ff;
+    --surface: #ffffff;
+
+    --text: #25213b;
+    --muted: #88849a;
+    --border: #e5e1ef;
+
+    --success: #198754;
+    --danger: #dc3545;
+
+    --radius: 12px;
+    --shadow: 0 10px 35px rgba(42, 29, 83, 0.08);
+}
+
+/* RESET */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: var(--background);
+    color: var(--text);
+    min-height: 100vh;
+    line-height: 1.6;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+a {
+    text-decoration: none;
+}
+
+/* =====================================
+   AUTHENTICATION PAGES
+===================================== */
+
+.auth-container {
+    min-height: 100vh;
+    min-height: 100svh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 24px;
+}
+
+.auth-card {
+    width: 100%;
+    max-width: 430px;
+
+    background: var(--surface);
+
+    padding: 38px;
+
+    border-radius: 16px;
+    box-shadow: var(--shadow);
+}
+
+/* BRAND */
+
+.brand {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.brand-icon {
+    width: 50px;
+    height: 50px;
+
+    background: var(--primary);
+    color: white;
+
+    font-size: 25px;
+    font-weight: 700;
+
+    border-radius: 12px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    margin: 0 auto 12px;
+}
+
+.brand h3 {
+    font-weight: 700;
+    color: #34216b;
+    margin-bottom: 4px;
+}
+
+.brand p {
+    color: var(--muted);
+    font-size: 14px;
+}
+
+/* FORM HEADINGS */
+
+.auth-card h4 {
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.subtitle {
+    color: var(--muted);
+    font-size: 14px;
+    margin-bottom: 25px;
+}
+
+/* INPUT FIELDS */
+
+.form-label {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 7px;
+}
+
+.form-control {
+    width: 100%;
+    min-height: 46px;
+
+    padding: 11px 13px;
+
+    border: 1px solid var(--border);
+    border-radius: 8px;
+
+    font-size: 14px;
+    transition: 0.2s ease;
+}
+
+.form-control:focus {
+    border-color: var(--primary);
+
+    box-shadow: 0 0 0 3px
+        rgba(109, 74, 255, 0.12);
+}
+
+/* BUTTONS */
+
+.btn-primary {
+    width: 100%;
+
+    background: var(--primary);
+    border: 1px solid var(--primary);
+
+    padding: 12px;
+
+    border-radius: 8px;
+
+    color: white;
+    font-weight: 600;
+
+    transition: 0.2s ease;
+}
+
+.btn-primary:hover {
+    background: var(--primary-dark);
+    border-color: var(--primary-dark);
+}
+
+.btn-primary:focus-visible,
+a:focus-visible,
+.form-control:focus-visible {
+    outline: 3px solid rgba(109, 74, 255, 0.3);
+    outline-offset: 2px;
+}
+
+/* MESSAGES */
+
+.message {
+    font-size: 14px;
+    margin-bottom: 12px;
+    overflow-wrap: anywhere;
+}
+
+/* FOOTER */
+
+.auth-footer {
+    text-align: center;
+
+    margin-top: 24px;
+
+    font-size: 14px;
+    color: var(--muted);
+}
+
+.auth-footer a {
+    color: var(--primary);
+    font-weight: 600;
+}
+
+.auth-footer a:hover {
+    color: var(--primary-dark);
+}
+
+/* =====================================
+   RESPONSIVE DESIGN
+===================================== */
+
+/* TABLETS */
+
+@media (max-width: 768px) {
+
+    .auth-container {
+        padding: 20px;
+    }
+
+    .auth-card {
+        max-width: 450px;
+        padding: 32px;
+    }
+}
+
+/* MOBILE */
+
+@media (max-width: 576px) {
+
+    body {
+        font-size: 14px;
+    }
+
+    .auth-container {
+        padding: 16px;
+        align-items: center;
+    }
+
+    .auth-card {
+        padding: 25px 20px;
+        border-radius: 12px;
+    }
+
+    .brand {
+        margin-bottom: 24px;
+    }
+
+    .brand h3 {
+        font-size: 23px;
+    }
+
+    .auth-card h4 {
+        font-size: 21px;
+    }
+
+    .subtitle {
+        font-size: 13px;
+        margin-bottom: 20px;
+    }
+
+    .form-control {
+        min-height: 45px;
+        font-size: 16px;
+    }
+
+    .btn-primary {
+        min-height: 46px;
+    }
+
+    .auth-footer {
+        font-size: 13px;
+    }
+}
+
+/* SMALL MOBILE */
+
+@media (max-width: 360px) {
+
+    .auth-container {
+        padding: 10px;
+    }
+
+    .auth-card {
+        padding: 22px 16px;
+    }
+
+    .brand-icon {
+        width: 44px;
+        height: 44px;
+        font-size: 22px;
+    }
+}
+
+/* REDUCED MOTION */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+
+/* ================= BUTTON THEME ================= */
+
+.btn-primary {
+    background-color: #6c3ce9;
+    border-color: #6c3ce9;
+    color: #ffffff;
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+    background-color: #572bc4;
+    border-color: #572bc4;
+    color: #ffffff;
+}
+
+.btn-primary:active {
+    background-color: #4821a8 !important;
+    border-color: #4821a8 !important;
+}
+
+.btn-primary:disabled {
+    background-color: #a58ae8;
+    border-color: #a58ae8;
+}
