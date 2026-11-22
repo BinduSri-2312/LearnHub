@@ -1044,3 +1044,123 @@ if (logoutBtn) {
         }
     });
 }
+
+
+// ================= ADMIN CHANGE PASSWORD =================
+
+const changePasswordForm = document.getElementById("changePasswordForm");
+
+if (changePasswordForm) {
+
+    const passwordMessage = document.getElementById("passwordMessage");
+    const changePasswordBtn = document.getElementById("changePasswordBtn");
+
+    changePasswordForm.addEventListener("submit", async function (event) {
+        event.preventDefault();
+
+        const currentPassword = document.getElementById("currentPassword").value;
+        const newPassword = document.getElementById("newPassword").value;
+        const confirmPassword = document.getElementById("confirmPassword").value;
+
+        if (newPassword !== confirmPassword) {
+            passwordMessage.className = "alert alert-danger mt-3";
+            passwordMessage.textContent = "New passwords do not match.";
+            return;
+        }
+
+        changePasswordBtn.disabled = true;
+        changePasswordBtn.textContent = "Changing Password...";
+
+        try {
+            const response = await fetch(`${API_BASE}/admin/change-password`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                credentials: "include",
+                body: JSON.stringify({
+                    current_password: currentPassword,
+                    new_password: newPassword,
+                    confirm_password: confirmPassword
+                })
+            });
+
+            const data = await response.json();
+
+            if (!response.ok) {
+                throw new Error(data.message || "Password change failed.");
+            }
+
+            passwordMessage.className = "alert alert-success mt-3";
+            passwordMessage.textContent = data.message;
+
+            changePasswordForm.reset();
+
+            setTimeout(() => {
+                window.location.href = "../login.html";
+            }, 2000);
+
+        } catch (error) {
+            passwordMessage.className = "alert alert-danger mt-3";
+            passwordMessage.textContent = error.message;
+
+            changePasswordBtn.disabled = false;
+            changePasswordBtn.textContent = "Change Password";
+        }
+    });
+}
+
+// ================= FORGOT PASSWORD =================
+
+const forgotPasswordForm = document.getElementById("forgotPasswordForm");
+
+if (forgotPasswordForm) {
+
+    forgotPasswordForm.addEventListener("submit", async function (event) {
+        event.preventDefault();
+
+        const email = document.getElementById("resetEmail").value;
+        const newPassword = document.getElementById("resetPassword").value;
+        const confirmPassword = document.getElementById("confirmResetPassword").value;
+        const resetMessage = document.getElementById("resetMessage");
+
+        if (newPassword !== confirmPassword) {
+            resetMessage.className = "alert alert-danger mt-3";
+            resetMessage.textContent = "Passwords do not match.";
+            return;
+        }
+
+        try {
+            const response = await fetch(`${API_BASE}/forgot-password`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    email: email,
+                    new_password: newPassword,
+                    confirm_password: confirmPassword
+                })
+            });
+
+            const data = await response.json();
+
+            if (!response.ok) {
+                throw new Error(data.message || "Password reset failed.");
+            }
+
+            resetMessage.className = "alert alert-success mt-3";
+            resetMessage.textContent = data.message;
+
+            forgotPasswordForm.reset();
+
+            setTimeout(() => {
+                window.location.href = "login.html";
+            }, 2000);
+
+        } catch (error) {
+            resetMessage.className = "alert alert-danger mt-3";
+            resetMessage.textContent = error.message;
+        }
+    });
+}
