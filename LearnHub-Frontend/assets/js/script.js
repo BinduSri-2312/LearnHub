@@ -136,6 +136,59 @@ if (totalStudents) {
     loadAdminStats();
 }
 
+
+// ================= STUDENT DASHBOARD STATISTICS =================
+
+const studentDashboard = document.getElementById("totalEnrollments");
+
+if (studentDashboard) {
+
+    async function loadStudentStats() {
+        try {
+            const [coursesResponse, enrollmentsResponse] = await Promise.all([
+                fetch(`${API_BASE}/student/courses`, {
+                    credentials: "include"
+                }),
+                fetch(`${API_BASE}/student/my-courses`, {
+                    credentials: "include"
+                })
+            ]);
+
+            if (
+                coursesResponse.status === 401 ||
+                coursesResponse.status === 403 ||
+                enrollmentsResponse.status === 401 ||
+                enrollmentsResponse.status === 403
+            ) {
+                window.location.href = "../login.html";
+                return;
+            }
+
+            const coursesData = await coursesResponse.json();
+            const enrollmentsData = await enrollmentsResponse.json();
+
+            if (!coursesResponse.ok || !enrollmentsResponse.ok) {
+                throw new Error("Unable to load dashboard statistics.");
+            }
+
+            document.getElementById("totalCourses").textContent =
+                coursesData.courses.length;
+
+            document.getElementById("totalEnrollments").textContent =
+                enrollmentsData.courses.length;
+
+        } catch (error) {
+            console.error("Student dashboard error:", error);
+
+            document.getElementById("studentMessage").textContent =
+                "Unable to load dashboard statistics.";
+        }
+    }
+
+    loadStudentStats();
+}
+
+
 // ================= COURSE MANAGEMENT =================
 
 const coursesTableBody = document.getElementById("coursesTableBody");
